@@ -18,7 +18,7 @@
                          [
                                'email' => "'mariaballestas@gmail.com'",
                                'nombre' => "'MARIA BALLESTAS RIVERA'",
-                               'psw' => "'".password_hash('amalfy', PASSWORD_DEFAULT)."'",
+                               'psw' => "'".password_hash('maria', PASSWORD_DEFAULT)."'",
                                'fecha_nacimiento' => "'1990-05-11'",
                          ],
                          [

@@ -25,7 +25,7 @@ class EventsManager {
             }
           },
           error: function(){
-            alert("error en la comunicación con el servidor");
+            alert("1. error en la comunicación con el servidor");
           }
         })
 
@@ -118,7 +118,7 @@ class EventsManager {
           }
         },
         error: function(){
-          alert("error en la comunicación con el servidor");
+          alert("2. error en la comunicación con el servidor");
         }
       })
 
@@ -144,7 +144,7 @@ class EventsManager {
           }
         },
         error: function(){
-          alert("error en la comunicación con el servidor");
+          alert("3. error en la comunicación con el servidor");
         }
       })
       $('.delete-btn').find('img').attr('src', "img/trash.png");
@@ -189,7 +189,7 @@ class EventsManager {
             }
           },
           error: function(){
-            alert("error en la comunicación con el servidor");
+            alert("4. error en la comunicación con el servidor");
           }
         })
     }

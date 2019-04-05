@@ -1,5 +1,5 @@
- $(function(){
-    var l = new Login();
+$(function(){
+     var l = new Login();
  })
 
 
@@ -27,15 +27,15 @@
        contentType: false,
        data: form_data,
        type: 'POST',
-       success: function(php_response){
-         if (php_response.msg == "OK") {
-           window.location.href = 'main.html';
+       success: function(php_response){                  
+         if (php_response.acceso == "concedido") {
+             window.location.href = 'main.html';
          }else {
-           alert(php_response.msg);
+            alert("Acceso: " + php_response.acceso+ "\nMotivo: "+php_response.motivo);
          }
        },
-       error: function(){
-         alert("error en la comunicación con el servidor....");
+       error: function(){         
+         alert("Error al comunicarse con el servidor");
        }
      })
    }
