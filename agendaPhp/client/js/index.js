@@ -35,7 +35,7 @@ $(function(){
          }
        },
        error: function(){         
-         alert("Error al comunicarse con el servidor");
+         alert("40...Error al comunicarse con el servidor");
        }
      })
    }

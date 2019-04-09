@@ -143,6 +143,13 @@
        $total = $result->fetch_assoc();
        return($total['TOTAL_REC']);
      }
+     function getEventosUser($user_id){
+       $sql = "SELECT UE.id, UE.titulo, UE.fecha_inicio, UE.fecha_fin, UE.hora_inicio, UE.hora_fin, UE.dia_completo 
+               FROM USUARIOS U, USUARIOS_EVENTOS UE 
+               WHERE u.id = ue.fk_usuario 
+               AND u.id = ".$user_id.";";
+               return $this->ejecutarQuery($sql);
+     }
 
     /**
      * https://www.php.net

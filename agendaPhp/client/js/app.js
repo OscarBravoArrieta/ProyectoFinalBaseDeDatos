@@ -1,14 +1,9 @@
-
-
-
 class EventsManager {
     constructor() {
         this.obtenerDataInicial()
     }
-
-
-    obtenerDataInicial() {
-        let url = '../server/getEvents.php'
+    obtenerDataInicial() {    
+        let url = '../server/getEvents.php'        
         $.ajax({
           url: url,
           dataType: "json",
@@ -16,9 +11,9 @@ class EventsManager {
           processData: false,
           contentType: false,
           type: 'GET',
-          success: (data) =>{
-            if (data.msg=="OK") {
-              this.poblarCalendario(data.eventos)
+          success: (data) => {            
+            if (data.msg=="OK") {              
+              this.poblarCalendario(data.eventos);
             }else {
               alert(data.msg)
               window.location.href = 'index.html';
@@ -27,95 +22,90 @@ class EventsManager {
           error: function(){
             alert("1. error en la comunicación con el servidor");
           }
-        })
-
+        })       
     }
 
-    poblarCalendario(eventos) {
+    poblarCalendario(eventos) {      
+      console.log(eventos);        
         $('.calendario').fullCalendar({
             header: {
         		left: 'prev,next today',
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	/*defaultDate: '2019-04-08',*/
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
           droppable: true,
           dragRevertDuration: 0,
-          timeFormat: 'H:mm',
           eventDrop: (event) => {
               this.actualizarEvento(event)
           },
           events: eventos,
-          eventDragStart: (event,jsEvent) => {
+          eventDragStart: (event, jsEvent) => {
             $('.delete-btn').find('img').attr('src', "img/trash-open.png");
             $('.delete-btn').css('background-color', '#a70f19')
           },
           eventDragStop: (event,jsEvent) =>{
-            var trashEl = $('.delete-btn');
-            var ofs = trashEl.offset();
-            var x1 = ofs.left;
-            var x2 = ofs.left + trashEl.outerWidth(true);
-            var y1 = ofs.top;
-            var y2 = ofs.top + trashEl.outerHeight(true);
-            if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
-                jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
-                  this.eliminarEvento(event, jsEvent)
-                  $('.calendario').fullCalendar('removeEvents', event.id);
-            }
+             var trashEl = $('.delete-btn');
+             var ofs = trashEl.offset();
+             var x1 = ofs.left;
+             var x2 = ofs.left + trashEl.outerWidth(true);
+             var y1 = ofs.top;
+             var y2 = ofs.top + trashEl.outerHeight(true);
+             if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
+                 jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
+                   this.eliminarEvento(event, jsEvent)
+                   $('.calendario').fullCalendar('removeEvents', event.id);
+             }
 
           }
         })
     }
 
     anadirEvento(){
-      var form_data = new FormData();
-      form_data.append('titulo', $('#titulo').val())
-      form_data.append('start_date', $('#start_date').val())
-      form_data.append('allDay', document.getElementById('allDay').checked)
-      if (!document.getElementById('allDay').checked) {
-        form_data.append('end_date', $('#end_date').val())
-        form_data.append('end_hour', $('#end_hour').val())
-        form_data.append('start_hour', $('#start_hour').val())
-      }else {
-        form_data.append('end_date', "")
-        form_data.append('end_hour', "")
-        form_data.append('start_hour', "")
-      }
-      $.ajax({
-        url: '../server/new_event.php',
-        dataType: "json",
-        cache: false,
-        processData: false,
-        contentType: false,
-        data: form_data,
-        type: 'POST',
-        success: (data) =>{
-          if (data.msg=="OK") {
-            alert('Se ha añadido el evento exitosamente')
-            if (document.getElementById('allDay').checked) {
-              $('.calendario').fullCalendar('renderEvent', {
-                title: $('#titulo').val(),
-                start: $('#start_date').val(),
-                allDay: true
-              })
-            }else {
-              $('.calendario').fullCalendar('renderEvent', {
-                title: $('#titulo').val(),
-                start: $('#start_date').val()+" "+$('#start_hour').val(),
-                allDay: false,
-                end: $('#end_date').val()+" "+$('#end_hour').val()
-              })
-            }
-
-
-
-
-          }else {
-            alert(data.msg)
-          }
+       var form_data = new FormData();
+       form_data.append('titulo', $('#titulo').val())
+       form_data.append('start_date', $('#start_date').val())
+       form_data.append('allDay', document.getElementById('allDay').checked)
+       if (!document.getElementById('allDay').checked) {
+         form_data.append('end_date', $('#end_date').val())
+         form_data.append('end_hour', $('#end_hour').val())
+         form_data.append('start_hour', $('#start_hour').val())
+       }else {
+         form_data.append('end_date', "")
+         form_data.append('end_hour', "")
+         form_data.append('start_hour', "")
+       }
+       $.ajax({
+         url: '../server/new_event.php',
+         dataType: "json",
+         cache: false,
+         processData: false,
+         contentType: false,
+         data: form_data,
+         type: 'POST',
+         success: (data) =>{
+           if (data.msg=="OK") {
+             alert('Se ha añadido el evento exitosamente')
+             if (document.getElementById('allDay').checked) {
+                 $('.calendario').fullCalendar('renderEvent', {
+                 title: $('#titulo').val(),
+                 start: $('#start_date').val(),
+                 allDay: true
+               })
+             }else {
+               $('.calendario').fullCalendar('renderEvent', {
+                 title: $('#titulo').val(),
+                 start: $('#start_date').val()+" "+$('#start_hour').val(),
+                 allDay: false,
+                 end: $('#end_date').val()+" "+$('#end_hour').val()
+               })
+             }
+           }else {
+             alert(data.msg)
+           }
         },
         error: function(){
           alert("2. error en la comunicación con el servidor");
