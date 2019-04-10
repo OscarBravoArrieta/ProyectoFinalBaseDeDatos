@@ -87,8 +87,8 @@ class EventsManager {
          data: form_data,
          type: 'POST',
          success: (data) =>{
-           if (data.msg=="OK") {
-             alert('Se ha añadido el evento exitosamente')
+           if (data.msg=="OK") {            
+             alert('Se ha añadido el evento exitosamente')             
              if (document.getElementById('allDay').checked) {
                  $('.calendario').fullCalendar('renderEvent', {
                  title: $('#titulo').val(),
@@ -106,6 +106,7 @@ class EventsManager {
            }else {
              alert(data.msg)
            }
+           
         },
         error: function(){
           alert("2. error en la comunicación con el servidor");
@@ -199,6 +200,7 @@ $(function(){
 
 
 function initForm(){
+  
   $('#start_date, #titulo, #end_date').val('');
   $('#start_date, #end_date').datepicker({
     dateFormat: "yy-mm-dd"
@@ -223,3 +225,4 @@ function initForm(){
   })
 
 }
+

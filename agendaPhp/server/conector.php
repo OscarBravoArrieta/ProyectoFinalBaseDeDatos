@@ -150,6 +150,14 @@
                AND u.id = ".$user_id.";";
                return $this->ejecutarQuery($sql);
      }
+     function updateEvento($fila){
+            $sql = "UPDATE USUARIOS_EVENTOS SET fecha_inicio = '".$fila['start_date']."', fecha_fin = '".$fila['end_date']."' WHERE id = '".$id = $fila['id']."';";
+            return $this->ejecutarQuery($sql);            
+     }
+     function deleteEvento($evento_id){
+           $sql = "DELETE FROM USUARIOS_EVENTOS WHERE id = '".$evento_id."';";           
+           return $this->ejecutarQuery($sql);
+     }
 
     /**
      * https://www.php.net

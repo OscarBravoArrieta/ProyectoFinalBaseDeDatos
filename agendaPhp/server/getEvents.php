@@ -14,10 +14,16 @@
                          $response['eventos'][$i]['id'] = $fila['id'];
                          $response['eventos'][$i]['title'] = $fila['titulo'];
                          $response['eventos'][$i]['start'] = $fila['fecha_inicio'];
-                         //$response['eventos'][$i]['start_hour'] = $fila['hora_inicio'];
+                         $response['eventos'][$i]['start_hour'] = $fila['hora_inicio'];
                          $response['eventos'][$i]['end'] = $fila['fecha_fin'];                                                  
-                         //$response['eventos'][$i]['end_hour'] = $fila['hora_fin'];
-                         //$response['eventos'][$i]['allDay'] = false;
+                         $response['eventos'][$i]['end_hour'] = $fila['hora_fin'];
+                         if($fila['dia_completo'] == 1){
+                               $response['eventos'][$i]['allDay'] = true;
+
+                         }else{
+                               $response['eventos'][$i]['allDay'] = false;
+                         }
+                             
                          $i++;                                                    
                    } 
                    $response['msg'] = "OK";                      
