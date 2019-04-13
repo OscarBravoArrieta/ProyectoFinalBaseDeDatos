@@ -10,9 +10,9 @@
              $data = array();
              $data = [
                          [
-                               'email' => "'andresmaldonado@gmail.com'",
+                               'email' => "'nextu@gmail.com'",
                                'nombre' => "'ANDRES MALDONADO'",
-                               'psw' => "'".password_hash('andres', PASSWORD_DEFAULT)."'",
+                               'psw' => "'".password_hash('nextu', PASSWORD_DEFAULT)."'",
                                'fecha_nacimiento' => "'1990-05-13'"
                          ],
                          [
@@ -39,4 +39,5 @@
        }else {
              echo "No se pudo conectar a la base de datos";
        }
+       
 ?>
